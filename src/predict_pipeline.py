@@ -10,6 +10,7 @@ class PredictPipeline:
     def __init__(self, model_name):
         self.model_name = model_name
         self.model = self.load_model()
+        self.preprocessor = self.load_preprocessor()
 
     def load_model(self):
         current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -18,6 +19,13 @@ class PredictPipeline:
             model = pickle.load(f)
         self.feature_names = DataTransformationConfig.feature_names
         return model
+
+    def load_preprocessor(self):
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        preprocessor_path = os.path.join(current_dir, "..", "artifacts", "models", "preprocessor.pkl")
+        with open(preprocessor_path, "rb") as f:
+            preprocessor = pickle.load(f)
+        return preprocessor
 
     def preprocess_input(self, input_data):
         data_transformation = DataTransformation()
@@ -33,8 +41,10 @@ class PredictPipeline:
             input_data = input_data.drop('Churn', axis=1)
 
         transformed_data = data_transformation.transform(input_data)
-        transformed_data = transformed_data.reindex(columns=self.feature_names, fill_value=0)
-        return transformed_data
+        preprocessed_data = self.preprocessor.transform(transformed_data)  # Use the loaded preprocessor
+        preprocessed_data = preprocessed_data.reindex(columns=self.feature_names, fill_value=0)
+        return preprocessed_data
+
 
     
     def check_required_features(self, data):

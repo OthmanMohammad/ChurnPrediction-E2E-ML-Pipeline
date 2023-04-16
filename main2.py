@@ -27,20 +27,20 @@ def test_predict_pipeline():
         "PhoneService": ["Yes"],
         "MultipleLines": ["No"],
         "InternetService": ["DSL"],
-        "OnlineSecurity": ["No"],
-        "OnlineBackup": ["No"],
-        "DeviceProtection": ["Yes"],
+        "OnlineSecurity": ["Yes"],
+        "OnlineBackup": ["Yes"],
+        "DeviceProtection": ["No"],
         "TechSupport": ["No"],
         "StreamingMovies": ["No"],
         "Contract": ["Month-to-month"],
-        "PaperlessBilling": ["Np"],
+        "PaperlessBilling": ["Yes"],
         "PaymentMethod": ["Electronic check"],
-        "MonthlyCharges": [0],
-        "TotalCharges": ["1"]
+        "MonthlyCharges": [63.58],
+        "TotalCharges": ["148.15"]
     })
 
     # Create a PredictPipeline instance for the desired model, e.g., 'logistic_regression'
-    predict_pipeline = PredictPipeline(model_name="logistic_regression")
+    predict_pipeline = PredictPipeline(model_name="xgboost")
 
     # Call the predict method with the sample input DataFrame
     predictions = predict_pipeline.predict(sample_input)

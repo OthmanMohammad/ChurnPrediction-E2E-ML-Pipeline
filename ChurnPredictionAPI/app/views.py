@@ -12,7 +12,7 @@ from src.predict_pipeline import PredictPipeline
 from src.components.data_transformation import DataTransformationConfig
 
 # Initialize the predict pipeline
-predict_pipeline = PredictPipeline(model_name="svm")
+predict_pipeline = PredictPipeline(model_name="logistic_regression")
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -22,17 +22,8 @@ def predict():
     # Convert the input data to a DataFrame
     input_df = pd.DataFrame(input_data, index=[0])
 
-    # Preprocess the input DataFrame
-    preprocessed_data = predict_pipeline.preprocess_input(input_df)
-    print("Preprocessed data:\n", preprocessed_data)  # Print preprocessed data
-
-    # If your model supports predict_proba(), you can print predicted probabilities:
-    if hasattr(predict_pipeline.model, "predict_proba"):
-        probabilities = predict_pipeline.model.predict_proba(preprocessed_data)
-        print("Predicted probabilities:\n", probabilities)  # Print predicted probabilities
-
-    # Call the predict method with the preprocessed DataFrame
-    predictions = predict_pipeline.model.predict(preprocessed_data)
+    # Call the predict method with the input DataFrame
+    predictions = predict_pipeline.predict(input_df)
 
     # Convert the predictions to a JSON object
     output = {"prediction": int(predictions[0])}
