@@ -1,4 +1,0 @@
-Flask
-gunicorn
-pandas
-python-dotenv
