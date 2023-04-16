@@ -20,8 +20,12 @@ def main():
     data_transformation_obj = DataTransformation()
     train_data = pd.read_csv(train_file_path)
     test_data = pd.read_csv(test_file_path)
+    print("Columns in the input data before transformation:", train_data.columns)
+    print("Columns in the input data before transformation:", test_data.columns)
     X_train = data_transformation_obj.transform(train_data)
     X_test = data_transformation_obj.transform(test_data)
+
+
 
     # Extract target variable from data
     y_train = X_train.pop('Churn').values

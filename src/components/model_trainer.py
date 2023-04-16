@@ -7,6 +7,7 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
 from src.config import models, param_grids, ModelTrainerConfig
+from src.components.preprocessor import Preprocessor
 
 
 class ModelTrainer:
@@ -55,6 +56,9 @@ class ModelTrainer:
 
 
     def initiate_model_training(self, X_train, y_train, X_test, y_test):
+        preprocessor = Preprocessor()
+        X_train = preprocessor.fit_transform(X_train)
+        X_test = preprocessor.transform(X_test)
         model_results = {}
         for model_name, model in models.items():
             param_grid = param_grids.get(model_name, {})
@@ -67,4 +71,11 @@ class ModelTrainer:
                 'best_score': best_score,
                 'test_accuracy': test_accuracy
             }
+
+        # Save the preprocessor as a separate file, not one for each model
+        save_object(
+            file_path=os.path.join(self.model_trainer_config.trained_model_file_path, "preprocessor.pkl"),
+            obj=preprocessor
+        )
+
         return model_results
