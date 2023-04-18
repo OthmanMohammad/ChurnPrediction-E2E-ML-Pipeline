@@ -14,4 +14,5 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 COPY . .
 
 # Set the entry point for the container
-ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5000", "ChurnPredictionAPI.app.views:app"]
+CMD ["python", "ChurnPredictionAPI/run.py"]
+
