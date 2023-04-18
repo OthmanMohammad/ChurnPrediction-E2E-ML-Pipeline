@@ -2,7 +2,7 @@ import os
 import sys
 import pickle
 from flask import request, jsonify
-from app import app
+from . import app
 import pandas as pd
 
 # Add the ChurnPrediction directory to the sys.path
