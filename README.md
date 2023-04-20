@@ -9,7 +9,7 @@ The project's architecture, designed for modularity, scalability, and efficiency
 
 [Data ingestion](#data-preparation) involves the acquisition and initial processing of raw data from multiple sources, ensuring compatibility with subsequent steps. The [data transformation module](#data-preparation) preprocesses and transforms the data, addressing issues like missing values, outliers, and feature scaling, making it suitable for model training. [Model training](#model-training-and-evaluation) explores various machine learning algorithms using the preprocessed data to optimize the solution. The [model evaluation component](#model-training-and-evaluation) selects the most appropriate model based on performance metrics such as accuracy, precision, recall, and F1 score. Lastly, the [Flask API](#api-deployment) deploys the trained model, providing users with an accessible interface for the model's predictive capabilities.
 
-[Docker](#docker-deployment) is employed for containerization, facilitating portability and reproducibility throughout the project. Deployment on cloud platforms such as AWS is made seamless by leveraging [EC2 instances and configuring security groups](#aws-deployment-with-ec2-and-docker) to ensure proper access control. [Continuous integration and deployment](#continuous-integration-and-deployment-with-github-actions-ci/cd-pipeline) are achieved using GitHub Actions, contributing to the project's robustness and consistency across various environments.
+[Docker](#docker-deployment) is employed for containerization, facilitating portability and reproducibility throughout the project. Deployment on cloud platforms such as AWS is made seamless by leveraging [EC2 instances and configuring security groups](#aws-deployment-with-ec2-and-docker) to ensure proper access control. [Continuous integration and deployment](#continuous-integration-and-deployment-with-github-actions-cicd-pipeline) are achieved using GitHub Actions, contributing to the project's robustness and consistency across various environments.
 
 The modular architecture allows for seamless additions or modifications to components without disrupting the entire pipeline's functionality. The incorporation of containerization, cloud deployment, and continuous integration and deployment streamlines the development and deployment process, ultimately enhancing the project's overall efficiency and reliability.
 
@@ -289,3 +289,21 @@ echo "Run your tests here"
 
 - **Build and push Docker image**: Employs the `docker/setup-buildx-action@v1` action to set up Docker Buildx, followed by the `docker/login-action@v1` action to authenticate with Docker Hub. The `docker/build-push-action@v2` action is then used to build the Docker image using the project's `Dockerfile` and push it to Docker Hub, tagging it with the desired version.
 
+Future Work
+-----------
+There are several opportunities for enhancing and improving the churn prediction project:
+
+1. Experiment with different machine learning algorithms and feature selection techniques to further optimize the model's performance.
+2. Implement a real-time data ingestion system to continuously update the model as new data becomes available.
+3. Integrate the project with additional cloud platforms for more deployment options.
+4. Develop a user-friendly web or mobile interface for interacting with the Flask API.
+
+## Author
+**Mohammad Othman** -
+Data Scientist and Machine Learning Engineer
+
+[GitHub](https://github.com/OthmanMohammad) | [LinkedIn](https://www.linkedin.com/in/real-mohammad-othman/)
+
+## License
+
+This project is licensed under the MIT License. For more information, please refer to the [LICENSE](LICENSE) file in the repository.
